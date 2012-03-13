@@ -20,10 +20,12 @@ public class Start {
 	private Texture cadreSelectionTex;
 	public int mouseX, mouseY;
 	public Joueur joueur;
+	public Enemy mechant;
 	public World world;
 	private int selectionTile = Tile.WALL;
 	private Texture selectionTileTex = null;
 	public int drawLayer = 0;
+	private int delta;
 
 	public Start() {
 
@@ -54,6 +56,7 @@ public class Start {
 			gameUpdate();
 			world.draw();
 			joueur.draw();
+			mechant.draw();
 			world.drawLayer();
 			drawSelect((int) Math.round(mouseX / Tile.WIDTH) ,(int) Math.round(mouseY / Tile.HEIGHT));
 			drawMenuEdit();
@@ -69,6 +72,7 @@ public class Start {
 			gameUpdate();
 			world.draw();
 			joueur.draw();
+			mechant.draw();
 			world.drawLayer();
 			
 		}
@@ -113,8 +117,13 @@ public class Start {
 			
 		}
 		
-		joueur.updateDelta(getDelta());
+		delta = getDelta();
+		joueur.updateDelta(delta);
 		joueur.move();
+		
+		mechant.updateDelta(delta);
+		mechant.move();
+		
 	}
 
 	private void getInput() {
@@ -214,6 +223,7 @@ public class Start {
 
 		world = new World();
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
+		mechant = new Enemy(400,400,32,32,"link", world);
 
 	}
 

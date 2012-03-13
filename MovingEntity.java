@@ -9,7 +9,7 @@ public class MovingEntity {
 	double dx, dy;
 	public String textureName;
 	public Texture texture;
-	private int delta = 0; 
+	public int delta = 0; 
 	public World world;
 	public int boost = 1; // ca va degager, juste pour des tests
 
@@ -44,7 +44,7 @@ public class MovingEntity {
 	public void move() {
 		
 		movingBehavior();
-
+		
 		for (int i = 0; i < world.WIDTH - 1; i++) {
 			for (int j = 0; j < world.HEIGHT - 1; j++) {
 				for (int z = 0; z < world.LAYER; z++) {
@@ -94,7 +94,7 @@ public class MovingEntity {
 				}
 			}
 		}
-
+		
 		if (xPos >= 800 - width && dx > 0)
 			dx = 0;
 		if (xPos <= 0 && dx < 0)
@@ -103,7 +103,7 @@ public class MovingEntity {
 			dy = 0;
 		if (yPos <= 0 + height && dy < 0)
 			dy = 0;
-
+		 
 		xPos += (dx * delta * boost); // boost ca va degager
 		yPos += (dy * delta * boost); // c'est juste pour des tests
 		

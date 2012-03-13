@@ -35,8 +35,15 @@ public class MovingEntity {
 	public void draw() {
 
 	}
+	
+	public void movingBehavior(){
+		
+		
+	}
 
 	public void move() {
+		
+		movingBehavior();
 
 		for (int i = 0; i < world.WIDTH - 1; i++) {
 			for (int j = 0; j < world.HEIGHT - 1; j++) {
@@ -52,8 +59,7 @@ public class MovingEntity {
 								dy = 0;
 
 						}
-						if (xPos + (width / 2) >= world.currentGrid[i][j][z]
-								.getxPos()
+						if (xPos + (width / 2) >= world.currentGrid[i][j][z].getxPos()
 								&& xPos + (width / 2) <= world.currentGrid[i][j][z].getxPos() + Tile.WIDTH
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + height >= world.currentGrid[i][j][z].getyPos()

@@ -8,6 +8,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class Image {
 	
+	
 	static Texture grass = loadTexture("grass");
 	static Texture wall = loadTexture("wall");
 	static Texture water = loadTexture("water");

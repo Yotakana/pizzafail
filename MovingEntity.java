@@ -106,6 +106,7 @@ public class MovingEntity {
 
 		xPos += (dx * delta * boost); // boost ca va degager
 		yPos += (dy * delta * boost); // c'est juste pour des tests
+		
 
 	}
 

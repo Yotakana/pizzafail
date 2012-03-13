@@ -50,7 +50,7 @@ public class Start {
 		switch (state) {
 		
 		case EDIT:
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+			GraphicCall.clearScreen();
 			gameUpdate();
 			world.draw();
 			joueur.draw();
@@ -65,7 +65,7 @@ public class Start {
 			drawMenu();
 			break;
 		case GAME:
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+			GraphicCall.clearScreen();
 			gameUpdate();
 			world.draw();
 			joueur.draw();

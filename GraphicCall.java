@@ -7,6 +7,12 @@ import org.lwjgl.opengl.GL11;
 
 public class GraphicCall {
 	
+	public static void clearScreen(){
+		
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		
+	}
+	
 	
 	public static void setUpOpenGL(int width, int height) {
 		

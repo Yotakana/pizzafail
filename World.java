@@ -61,10 +61,12 @@ public class World {
 	}
 	
 	public void update(){
-			
-		robert.updateDelta(16);
-		robert.move();
-	
+		
+		// totallement bancale ! mais ca marche... a revoir
+		if(robert !=null){
+			robert.updateDelta(16);
+			robert.move();
+		}
 	}
 
 	public void draw() {
@@ -80,14 +82,19 @@ public class World {
 	
 	public void drawLayer(){
 		
+		// totallement bancale ! mais ca marche... a revoir
+		
+		if(robert !=null)
+			robert.draw();
+		if(robert == null && mapID == 0)
+			robert = new Enemy(400, 400, 32, 32, "soldier", this);
+		
 		for (int x = 0; x < WIDTH - 1; x++) {
 			for (int y = 0; y < HEIGHT - 1 ; y++) {
 				if(currentGrid[x][y][1] != null)
 					currentGrid[x][y][1].draw();
 			}
 		}
-		
-		robert.draw();
 		
 	}
 	
@@ -102,6 +109,7 @@ public class World {
 			break;
 		case 1:
 			currentGrid = grid2;
+			robert = null;
 			xCoord = 1;
 			yCoord = 0;
 			break;

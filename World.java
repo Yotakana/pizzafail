@@ -15,8 +15,14 @@ public class World {
 	private int[][] mapCoord = new int[MAX_COL][MAX_ROW];
 	public int mapID;
 	public int xCoord, yCoord;
+	public Enemy robert;
 
 	public World() {
+		
+		// defini la map de depart
+		mapCoord [0][0] = 1;
+		mapCoordToMapID();
+		setMap(mapID);
 		
 		// Map x: 0 y: 0
 		for (int x = 0; x < WIDTH - 1; x++) {
@@ -50,11 +56,15 @@ public class World {
 			}
 		}
 		
-		
-		mapCoord [0][0] = 1;
-		mapCoordToMapID();
-		setMap(mapID);
+		robert = new Enemy(400, 400, 32, 32, "soldier", this);
 
+	}
+	
+	public void update(){
+			
+		robert.updateDelta(16);
+		robert.move();
+	
 	}
 
 	public void draw() {
@@ -76,6 +86,8 @@ public class World {
 					currentGrid[x][y][1].draw();
 			}
 		}
+		
+		robert.draw();
 		
 	}
 	

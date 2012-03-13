@@ -56,7 +56,6 @@ public class Start {
 			gameUpdate();
 			world.draw();
 			joueur.draw();
-			mechant.draw();
 			world.drawLayer();
 			drawSelect((int) Math.round(mouseX / Tile.WIDTH) ,(int) Math.round(mouseY / Tile.HEIGHT));
 			drawMenuEdit();
@@ -65,7 +64,6 @@ public class Start {
 			world.draw();
 			joueur.draw();
 			gameUpdate();
-			mechant.draw();
 			world.drawLayer();
 			drawMenu();
 			break;
@@ -74,7 +72,6 @@ public class Start {
 			gameUpdate();
 			world.draw();
 			joueur.draw();
-			mechant.draw();
 			world.drawLayer();
 			
 		}
@@ -125,9 +122,7 @@ public class Start {
 		
 		switch (state) {
 		case GAME:
-		mechant.updateDelta(delta);
-		mechant.move();
-		break;
+		world.update();
 		}
 		
 	}
@@ -229,7 +224,6 @@ public class Start {
 
 		world = new World();
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
-		mechant = new Enemy(400,400,32,32,"soldier", world);
 
 	}
 

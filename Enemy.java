@@ -17,6 +17,7 @@ public class Enemy extends MovingEntity {
 	public void movingBehavior() {
 		
 		if (System.currentTimeMillis() > Time + timeInterval) {
+			
 			dx = 0;
 			dy = 0;
 

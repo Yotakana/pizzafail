@@ -109,17 +109,19 @@ public class World {
 			break;
 		case 1:
 			currentGrid = grid2;
-			robert = null;
+			robert = null; // a modif
 			xCoord = 1;
 			yCoord = 0;
 			break;
 		case 2:
 			currentGrid = grid3;
+			robert = null; // a modif
 			xCoord = 0;
 			yCoord = 1;
 			break;
 		case 3:
 			currentGrid = grid4;
+			robert = null; // a modif
 			xCoord = 1;
 			yCoord = 1;
 			break;

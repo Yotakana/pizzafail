@@ -1,10 +1,8 @@
 package jeu;
-import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
@@ -15,12 +13,12 @@ public class Start {
 	private static int FPS = 60;
 	private long lastFrame;
 	private State state = State.MENU;
-	private boolean running = true;
+	public boolean running = true;
 	private Texture menuTex;
 	private Texture editTex;
 	private Texture selectTex;
 	private Texture cadreSelectionTex;
-	private int mouseX, mouseY;
+	public int mouseX, mouseY;
 	public Joueur joueur;
 	public World world;
 	private int selectionTile = Tile.WALL;
@@ -29,8 +27,8 @@ public class Start {
 
 	public Start() {
 
-		setUpDisplay();
-		setUpOpenGL();
+		GraphicCall.setUpDisplay(WIDTH, HEIGHT);
+		GraphicCall.setUpOpenGL(WIDTH, HEIGHT);
 		setupEntity();
 		setUpTimer();
 
@@ -219,18 +217,6 @@ public class Start {
 
 	}
 
-	private void setUpDisplay() {
-
-		try {
-			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-			Display.create();
-		} catch (LWJGLException e) {
-			e.printStackTrace();
-		}
-		Display.setTitle("Yo Batard!");
-
-	}
-
 	private long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
@@ -244,18 +230,6 @@ public class Start {
 
 	private void setUpTimer() {
 		lastFrame = getTime();
-	}
-
-	private void setUpOpenGL() {
-
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_BLEND); 
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, WIDTH, 0, HEIGHT, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
 	}
 
 	private void drawSelect(int mousex ,int mousey){
@@ -370,12 +344,12 @@ public class Start {
 		GL11.glEnd();
 	
 	}
-
+	
 	public static void main(String[] args) {
 
 		new Start();
 
-	}
+		}
 
 	public enum State {
 		MENU, GAME, EDIT;

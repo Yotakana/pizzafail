@@ -15,14 +15,13 @@ public class Enemy extends MovingEntity {
 
 	@Override
 	public void movingBehavior() {
+		
 		if (System.currentTimeMillis() > Time + timeInterval) {
 			dx = 0;
 			dy = 0;
 
 			Random random = new Random();
 			int r = random.nextInt(4);
-
-			System.out.println(r);
 
 			switch (r) {
 			case 0:
@@ -63,9 +62,6 @@ public class Enemy extends MovingEntity {
 		GL11.glTexCoord2d(0, texture.getHeight());
 		GL11.glVertex2d(xPos, yPos - height);
 		GL11.glEnd();
-
-		System.out.println(dx + " " + dy);
-		System.out.println(delta);
 
 	}
 

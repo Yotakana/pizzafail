@@ -42,7 +42,7 @@ public class MovingEntity {
 	}
 
 	public void move() {
-		
+	
 		movingBehavior();
 		
 		for (int i = 0; i < world.WIDTH - 1; i++) {

@@ -2,8 +2,10 @@ package jeu;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
 public class Start {
@@ -20,12 +22,13 @@ public class Start {
 	private Texture cadreSelectionTex;
 	public int mouseX, mouseY;
 	public Joueur joueur;
-	public Enemy mechant;
 	public World world;
 	private int selectionTile = Tile.WALL;
 	private Texture selectionTileTex = null;
-	public int drawLayer = 0;
+	private int drawLayer = 0;
 	private int delta;
+	
+	private Audio music = Sound.intro;;
 
 	public Start() {
 
@@ -33,7 +36,7 @@ public class Start {
 		GraphicCall.setUpOpenGL(WIDTH, HEIGHT);
 		setupEntity();
 		setUpTimer();
-
+		music.playAsMusic(1.0f, 1.0f, true);
 		while (running) {
 			render();
 			getInput();
@@ -45,6 +48,7 @@ public class Start {
 		}
 		
 		Display.destroy();
+		AL.destroy();
 	}
 
 	private void render() {
@@ -68,12 +72,12 @@ public class Start {
 			drawMenu();
 			break;
 		case GAME:
+			music.stop();
 			GraphicCall.clearScreen();
 			gameUpdate();
 			world.draw();
 			joueur.draw();
-			world.drawLayer();
-			
+			world.drawLayer();		
 		}
 
 	}
@@ -122,7 +126,7 @@ public class Start {
 		
 		switch (state) {
 		case GAME:
-		world.update();
+			world.update();
 		}
 		
 	}
@@ -140,6 +144,7 @@ public class Start {
 			}
 			if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
 					state = State.MENU;
+					music.playAsMusic(1.0f, 1.0f, true);
 			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_E)) {

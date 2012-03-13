@@ -15,7 +15,7 @@ public class World {
 	private int[][] mapCoord = new int[MAX_COL][MAX_ROW];
 	public int mapID;
 	public int xCoord, yCoord;
-	public Enemy robert;
+	private Enemy robert;
 
 	public World() {
 		
@@ -131,10 +131,10 @@ public class World {
 	
 	private void mapCoordToMapID(){
 		
-		for(int p = 0; p < 2; p++){
-			for (int q = 0; q < 2; q++){
-				if(mapCoord[p][q] == 1){
-					mapID = p  + (q * 2);
+		for(int i = 0; i < 2; i++){
+			for (int j = 0; j < 2; j++){
+				if(mapCoord[i][j] == 1){
+					mapID = i  + (j * 2);
 				}
 			}
 		}

@@ -14,8 +14,6 @@ public class Image {
 	static Texture water = loadTexture("water");
 	static Texture tree = loadTexture("tree");
 	static Texture rock = loadTexture("rock");
-	static Texture menu = loadTexture("menu");
-	static Texture editMenu = loadTexture("edit");
 	static Texture selection = loadTexture("selection");
 	static Texture cadreSelection = loadTexture("cadreselection");
 	

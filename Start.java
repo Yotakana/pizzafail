@@ -21,8 +21,6 @@ public class Start {
 	private long lastFrame;
 	private State state = State.MENU;
 	public boolean running = true;
-	//private Texture menuTex;
-	private Texture editTex;
 	private Texture selectTex;
 	private Texture cadreSelectionTex;
 	public int mouseX, mouseY;
@@ -34,17 +32,15 @@ public class Start {
 	private int delta;
 	private Audio music = Sound.intro;
 	private TrueTypeFont font;
-	private Font awtFont;
+	private Font menuFont = new Font("Times New Roman", Font.BOLD, 24);
 	private boolean antiAlias = true;
 	
-
 	public Start () {
 
 		GraphicCall.setUpDisplay(WIDTH, HEIGHT);
 		GraphicCall.setUpOpenGL(WIDTH, HEIGHT);
 		setupEntity();
 		setUpTimer();
-		music.playAsMusic(1.0f, 1.0f, true);
 		
 		while (running) {
 			render();
@@ -237,6 +233,7 @@ public class Start {
 
 		world = new World();
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
+		font = new TrueTypeFont(menuFont, antiAlias);
 
 	}
 
@@ -280,22 +277,9 @@ public class Start {
 	
 	
 	private void drawMenuEdit() {
-
-		if(editTex == null)
-			editTex = Image.editMenu;
 		
-		editTex.bind();
-	
-		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2i(10, 40);
-			GL11.glTexCoord2d(editTex.getWidth(), 0);
-			GL11.glVertex2i(710, 40);
-			GL11.glTexCoord2d(editTex.getWidth(), editTex.getHeight());
-			GL11.glVertex2i(710, 90);
-			GL11.glTexCoord2d(0, editTex.getHeight());
-			GL11.glVertex2i(10, 90);
-		GL11.glEnd();
+		font.drawString(20, 20, "MODE EDITION", Color.black);
+		GraphicCall.resetColor();
 		
 		
 		if(cadreSelectionTex == null)
@@ -350,33 +334,11 @@ public class Start {
 	
 	private void drawMenu() {
 		
-		
-		//rien a faire la ...mais pour le moment ca ira
-		awtFont = new Font("Times New Roman", Font.BOLD, 24);
-		font = new TrueTypeFont(awtFont, antiAlias);
-		
+		font.drawString(52, 22, "MENU !         Echap : Quit G : Jeu", Color.black);
 		font.drawString(50, 20, "MENU !         Echap : Quit G : Jeu", Color.white);
-		
 		font.drawString(50, 550, "WOOOOOOOOO Du Text !!!!", Color.white);
 		GraphicCall.resetColor();
 		
-		/*
-		if(menuTex == null)
-			menuTex = Image.menu;
-		
-		menuTex.bind();
-	
-		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2i(50, 40);
-			GL11.glTexCoord2d(menuTex.getWidth(), 0);
-			GL11.glVertex2i(750, 40);
-			GL11.glTexCoord2d(menuTex.getWidth(), menuTex.getHeight());
-			GL11.glVertex2i(750, 90);
-			GL11.glTexCoord2d(0, menuTex.getHeight());
-			GL11.glVertex2i(50, 90);
-		GL11.glEnd();
-	*/
 	}
 	
 	public static void main (String[] args) {

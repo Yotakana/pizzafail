@@ -62,8 +62,8 @@ public class MovingEntity {
 						if (xPos + (width / 2) >= world.currentGrid[i][j][z].getxPos()
 								&& xPos + (width / 2) <= world.currentGrid[i][j][z].getxPos() + Tile.WIDTH
 								&& !world.currentGrid[i][j][z].isWalkable
-								&& yPos + height >= world.currentGrid[i][j][z].getyPos()
-								&& yPos + height <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
+								&& yPos + height >= world.currentGrid[i][j][z].getyPos() 
+								&& yPos + height <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) { 
 							System.out.println("colide at north");
 							if (dy > 0)
 								dy = 0;

@@ -27,7 +27,7 @@ public class World {
 		// Map x: 0 y: 0
 		for (int x = 0; x < WIDTH - 1; x++) {
 			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid1[x][y][0] = new Tile(x * Tile.WIDTH, (y * Tile.HEIGHT) + 32 ,Tile.GRASS);
+				grid1[x][y][0] = new Tile(x * Tile.WIDTH, y * Tile.HEIGHT ,Tile.GRASS);
 			}
 		}
 		
@@ -35,7 +35,7 @@ public class World {
 		// Map x: 1 y: 0
 		for (int x = 0; x < WIDTH - 1; x++) {
 			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid2[x][y][0] = new Tile(x * Tile.WIDTH, ( y * Tile.HEIGHT) +32 ,Tile.GRASS);
+				grid2[x][y][0] = new Tile(x * Tile.WIDTH, y * Tile.HEIGHT ,Tile.GRASS);
 			}
 		}
 		
@@ -44,7 +44,7 @@ public class World {
 		// Map x: 0 y: 1
 		for (int x = 0; x < WIDTH - 1; x++) {
 			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid3[x][y][0] = new Tile(x * Tile.WIDTH, (y * Tile.HEIGHT) + 32 ,Tile.GRASS);
+				grid3[x][y][0] = new Tile(x * Tile.WIDTH,y * Tile.HEIGHT ,Tile.GRASS);
 			}
 		}
 		
@@ -52,7 +52,7 @@ public class World {
 		// Map x: 1 y: 1
 		for (int x = 0; x < WIDTH - 1; x++) {
 			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid4[x][y][0] = new Tile(x * Tile.WIDTH, (y * Tile.HEIGHT) + 32 ,Tile.GRASS);
+				grid4[x][y][0] = new Tile(x * Tile.WIDTH,y * Tile.HEIGHT ,Tile.GRASS);
 			}
 		}
 		

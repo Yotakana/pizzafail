@@ -21,7 +21,7 @@ public class Start {
 	private long lastFrame;
 	private State state = State.MENU;
 	public boolean running = true;
-	private Texture menuTex;
+	//private Texture menuTex;
 	private Texture editTex;
 	private Texture selectTex;
 	private Texture cadreSelectionTex;
@@ -78,8 +78,6 @@ public class Start {
 			gameUpdate();
 			world.drawLayer();
 			drawMenu();
-			font.drawString(50, 550, "WOOOOOOOOO Du Text !!!!", Color.white);
-			GraphicCall.resetColor();
 			break;
 		case GAME:
 			music.stop();
@@ -207,7 +205,7 @@ public class Start {
 				int x = (int) Math.round(mouseX / 32);
 				int y = (int) Math.round(mouseY / 32);
 				if(world.currentGrid[x][y][drawLayer] == null){
-					world.currentGrid[x][y][drawLayer] = new Tile(x * Tile.WIDTH, ( y * Tile.HEIGHT) +32 ,selectionTile);
+					world.currentGrid[x][y][drawLayer] = new Tile(x * Tile.WIDTH, ( y * Tile.HEIGHT) ,selectionTile);
 					System.out.println("New Block at : "+ x + " , " + y);
 				}
 			}
@@ -239,10 +237,6 @@ public class Start {
 
 		world = new World();
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
-		
-		//rien a faire la ...mais pour le moment ca ira
-		awtFont = new Font("Times New Roman", Font.BOLD, 24);
-		font = new TrueTypeFont(awtFont, antiAlias);
 
 	}
 
@@ -356,6 +350,17 @@ public class Start {
 	
 	private void drawMenu() {
 		
+		
+		//rien a faire la ...mais pour le moment ca ira
+		awtFont = new Font("Times New Roman", Font.BOLD, 24);
+		font = new TrueTypeFont(awtFont, antiAlias);
+		
+		font.drawString(50, 20, "MENU !         Echap : Quit G : Jeu", Color.white);
+		
+		font.drawString(50, 550, "WOOOOOOOOO Du Text !!!!", Color.white);
+		GraphicCall.resetColor();
+		
+		/*
 		if(menuTex == null)
 			menuTex = Image.menu;
 		
@@ -371,7 +376,7 @@ public class Start {
 			GL11.glTexCoord2d(0, menuTex.getHeight());
 			GL11.glVertex2i(50, 90);
 		GL11.glEnd();
-	
+	*/
 	}
 	
 	public static void main (String[] args) {

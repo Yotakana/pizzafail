@@ -286,7 +286,9 @@ public class Start {
 	
 	private void drawMenuEdit() {
 		
-		font.drawString(20, 20, "MODE EDITION", Color.black);
+		font.drawString(20, 20, "MODE EDITION :", Color.black);
+		font.drawString(20, 50, "S : Save ", Color.black);
+		font.drawString(20, 80, "L : load ", Color.black);
 		GraphicCall.resetColor();
 		
 		

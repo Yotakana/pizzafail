@@ -21,10 +21,10 @@ public class Joueur extends MovingEntity {
 			GL11.glVertex2d(xPos + width, yPos);
 		
 			GL11.glTexCoord2d(texture.getWidth(), texture.getHeight());
-			GL11.glVertex2d(xPos + width, yPos - height);
+			GL11.glVertex2d(xPos + width, yPos + height);
 		
 			GL11.glTexCoord2d(0, texture.getHeight());
-			GL11.glVertex2d(xPos, yPos - height);
+			GL11.glVertex2d(xPos, yPos + height);
 		GL11.glEnd();
 		
 	}

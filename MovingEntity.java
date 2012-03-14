@@ -42,8 +42,8 @@ public class MovingEntity {
 	}
 
 	public void move() {
-	
-		movingBehavior();
+		
+		movingBehavior(); // Pour Enemy.class 
 		
 		for (int i = 0; i < world.WIDTH - 1; i++) {
 			for (int j = 0; j < world.HEIGHT - 1; j++) {

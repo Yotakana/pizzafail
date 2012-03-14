@@ -1,13 +1,18 @@
 package jeu;
+
+import java.awt.Font;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.opengl.Texture;
 
+@SuppressWarnings("deprecation")
 public class Start {
 
 	private static int WIDTH = 800;
@@ -27,8 +32,11 @@ public class Start {
 	private Texture selectionTileTex = null;
 	private int drawLayer = 0;
 	private int delta;
+	private Audio music = Sound.intro;
+	private TrueTypeFont font;
+	private Font awtFont;
+	private boolean antiAlias = true;
 	
-	private Audio music = Sound.intro;;
 
 	public Start() {
 
@@ -37,18 +45,19 @@ public class Start {
 		setupEntity();
 		setUpTimer();
 		music.playAsMusic(1.0f, 1.0f, true);
+		
 		while (running) {
 			render();
 			getInput();
 			Display.update();
 			Display.sync(FPS);
-			
 			if(Display.isCloseRequested())
 				running = false;
 		}
 		
 		Display.destroy();
 		AL.destroy();
+		System.exit(0);
 	}
 
 	private void render() {
@@ -70,6 +79,8 @@ public class Start {
 			gameUpdate();
 			world.drawLayer();
 			drawMenu();
+			font.drawString(50, 550, "WOOOOOOOOO Du Text !!!!", Color.white);
+			GraphicCall.resetColor();
 			break;
 		case GAME:
 			music.stop();
@@ -134,7 +145,7 @@ public class Start {
 	private void getInput() {
 		
 		mouseX = Mouse.getX();
-		mouseY = Mouse.getY();
+		mouseY = 600 - Mouse.getY();
 
 		switch (state) {
 
@@ -152,9 +163,9 @@ public class Start {
 			}
 				
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-				joueur.setDy(.15);
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 				joueur.setDy(-.15);
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+				joueur.setDy(.15);
 			} else {
 				joueur.setDy(0);
 			}
@@ -229,6 +240,10 @@ public class Start {
 
 		world = new World();
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
+		
+		//rien a faire la ...mais pour le moment ca ira
+		awtFont = new Font("Times New Roman", Font.BOLD, 24);
+		font = new TrueTypeFont(awtFont, antiAlias);
 
 	}
 
@@ -280,13 +295,13 @@ public class Start {
 	
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2i(10, 590);
+			GL11.glVertex2i(10, 40);
 			GL11.glTexCoord2d(editTex.getWidth(), 0);
-			GL11.glVertex2i(710, 590);
+			GL11.glVertex2i(710, 40);
 			GL11.glTexCoord2d(editTex.getWidth(), editTex.getHeight());
-			GL11.glVertex2i(710, 540);
+			GL11.glVertex2i(710, 90);
 			GL11.glTexCoord2d(0, editTex.getHeight());
-			GL11.glVertex2i(10, 540);
+			GL11.glVertex2i(10, 90);
 		GL11.glEnd();
 		
 		
@@ -297,13 +312,13 @@ public class Start {
 		
 		GL11.glBegin(GL11.GL_QUADS); //BackGroung pour le preview des Tiles.
 			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2i(48, 52);
+			GL11.glVertex2i(48, 516);
 			GL11.glTexCoord2d(cadreSelectionTex.getWidth(), 0);
-			GL11.glVertex2i(84, 52);
+			GL11.glVertex2i(84, 516);
 			GL11.glTexCoord2d(cadreSelectionTex.getWidth(), cadreSelectionTex.getHeight());
-			GL11.glVertex2i(84, 16);
+			GL11.glVertex2i(84, 552);
 			GL11.glTexCoord2d(0, cadreSelectionTex.getHeight());
-			GL11.glVertex2i(48, 16);
+			GL11.glVertex2i(48, 552);
 		GL11.glEnd();
 		
 		switch(selectionTile){
@@ -329,13 +344,13 @@ public class Start {
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2d(0, 0);
-		GL11.glVertex2i(50, 50);
+		GL11.glVertex2i(50, 518);
 		GL11.glTexCoord2d(selectionTileTex.getWidth(), 0);
-		GL11.glVertex2i(82, 50);
+		GL11.glVertex2i(82, 518);
 		GL11.glTexCoord2d(selectionTileTex.getWidth(), selectionTileTex.getHeight());
-		GL11.glVertex2i(82, 18);
+		GL11.glVertex2i(82, 550);
 		GL11.glTexCoord2d(0, selectionTileTex.getHeight());
-		GL11.glVertex2i(50, 18);
+		GL11.glVertex2i(50, 550);
 		GL11.glEnd();
 	
 	}
@@ -349,13 +364,13 @@ public class Start {
 	
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2d(0, 0);
-			GL11.glVertex2i(50, 590);
+			GL11.glVertex2i(50, 40);
 			GL11.glTexCoord2d(menuTex.getWidth(), 0);
-			GL11.glVertex2i(750, 590);
+			GL11.glVertex2i(750, 40);
 			GL11.glTexCoord2d(menuTex.getWidth(), menuTex.getHeight());
-			GL11.glVertex2i(750, 540);
+			GL11.glVertex2i(750, 90);
 			GL11.glTexCoord2d(0, menuTex.getHeight());
-			GL11.glVertex2i(50, 540);
+			GL11.glVertex2i(50, 90);
 		GL11.glEnd();
 	
 	}

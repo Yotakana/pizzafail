@@ -63,16 +63,16 @@ public class Tile {
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2d(0, 0);
-		GL11.glVertex2d(xPos, yPos);
+		GL11.glVertex2d(xPos, yPos - HEIGHT);
 
 		GL11.glTexCoord2d(tex.getWidth(), 0);
-		GL11.glVertex2d(xPos + WIDTH, yPos);
-
-		GL11.glTexCoord2d(tex.getWidth(), tex.getHeight());
 		GL11.glVertex2d(xPos + WIDTH, yPos - HEIGHT);
 
+		GL11.glTexCoord2d(tex.getWidth(), tex.getHeight());
+		GL11.glVertex2d(xPos + WIDTH, yPos);
+
 		GL11.glTexCoord2d(0, tex.getHeight());
-		GL11.glVertex2d(xPos, yPos - HEIGHT);
+		GL11.glVertex2d(xPos, yPos);
 		GL11.glEnd();
 		
 		

@@ -28,15 +28,12 @@ public class Enemy extends MovingEntity {
 			case 0:
 				dx = .05;
 				break;
-
 			case 1:
 				dx = -.05;
 				break;
-
 			case 2:
 				dy = .05;
 				break;
-
 			case 3:
 				dy = -.05;
 				break;
@@ -58,10 +55,10 @@ public class Enemy extends MovingEntity {
 		GL11.glVertex2d(xPos + width, yPos);
 
 		GL11.glTexCoord2d(texture.getWidth(), texture.getHeight());
-		GL11.glVertex2d(xPos + width, yPos - height);
+		GL11.glVertex2d(xPos + width, yPos + height);
 
 		GL11.glTexCoord2d(0, texture.getHeight());
-		GL11.glVertex2d(xPos, yPos - height);
+		GL11.glVertex2d(xPos, yPos + height);
 		GL11.glEnd();
 
 	}

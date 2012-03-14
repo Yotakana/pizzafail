@@ -99,9 +99,9 @@ public class MovingEntity {
 			dx = 0;
 		if (xPos <= 0 && dx < 0)
 			dx = 0;
-		if (yPos >= 600 && dy > 0)
+		if (yPos >= 600 - height && dy > 0)
 			dy = 0;
-		if (yPos <= 0 + height && dy < 0)
+		if (yPos <= 0 && dy < 0)
 			dy = 0;
 		 
 		xPos += (dx * delta * boost); // boost ca va degager

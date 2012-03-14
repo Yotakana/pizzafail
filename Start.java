@@ -38,7 +38,7 @@ public class Start {
 	private boolean antiAlias = true;
 	
 
-	public Start() {
+	public Start () {
 
 		GraphicCall.setUpDisplay(WIDTH, HEIGHT);
 		GraphicCall.setUpOpenGL(WIDTH, HEIGHT);
@@ -54,9 +54,8 @@ public class Start {
 			if(Display.isCloseRequested())
 				running = false;
 		}
-		
-		Display.destroy();
 		AL.destroy();
+		Display.destroy();
 		System.exit(0);
 	}
 
@@ -113,19 +112,19 @@ public class Start {
 			
 		}
 
-		if(joueur.getyPos() <= 0 + joueur.height && world.yCoord +1 < world.MAX_ROW ){
+		if(joueur.getyPos() >= HEIGHT - joueur.height && world.yCoord +1 < world.MAX_ROW ){
 			
 			world.setMapCoord(world.xCoord , world.yCoord+1);
 			world.setMap(world.mapID);
-			joueur.setyPos(HEIGHT - 1);
+			joueur.setyPos(1);
 			//debug - à degager
 			System.out.println("MapID : " + world.mapID + " at : " + world.xCoord + " , " + world.yCoord);
 			
-		}else if(joueur.getyPos() >= HEIGHT && world.yCoord > 0 ){
+		}else if(joueur.getyPos() <= 0 && world.yCoord > 0 ){
 			
 			world.setMapCoord(world.xCoord , world.yCoord-1);
 			world.setMap(world.mapID);
-			joueur.setyPos(joueur.height + 1);
+			joueur.setyPos(HEIGHT - joueur.height -1);
 			//debug - à degager
 			System.out.println("MapID : " + world.mapID + " at : " + world.xCoord + " , " + world.yCoord);
 			
@@ -375,7 +374,7 @@ public class Start {
 	
 	}
 	
-	public static void main(String[] args) {
+	public static void main (String[] args) {
 
 		new Start();
 

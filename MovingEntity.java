@@ -40,10 +40,8 @@ public class MovingEntity {
 		
 		
 	}
-
-	public void move() {
-		
-		movingBehavior(); // Pour Enemy.class 
+	
+	public void checkCollision(){
 		
 		for (int i = 0; i < world.WIDTH - 1; i++) {
 			for (int j = 0; j < world.HEIGHT - 1; j++) {
@@ -54,7 +52,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos >= world.currentGrid[i][j][z].getyPos()
 								&& yPos <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
-							System.out.println("colide at south");
+							System.out.println("colide at north");
 							if (dy < 0)
 								dy = 0;
 
@@ -64,7 +62,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + height >= world.currentGrid[i][j][z].getyPos() 
 								&& yPos + height <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) { 
-							System.out.println("colide at north");
+							System.out.println("colide at south");
 							if (dy > 0)
 								dy = 0;
 
@@ -84,16 +82,19 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + (height / 2) >= world.currentGrid[i][j][z].getyPos()
 								&& yPos + (height / 2) <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
-							System.out.println("colide at est");
+							System.out.println("colide at east");
 							if (dx > 0)
 								dx = 0;
 
 						}
 					}
-
 				}
 			}
 		}
+	}
+
+	
+	public void checkBorderCollision(){
 		
 		if (xPos >= 800 - width && dx > 0)
 			dx = 0;
@@ -103,7 +104,15 @@ public class MovingEntity {
 			dy = 0;
 		if (yPos <= 0 && dy < 0)
 			dy = 0;
-		 
+		
+	}
+			
+	public void move() {
+		
+		movingBehavior(); // Pour Enemy.class 
+		checkCollision();
+		checkBorderCollision();
+		
 		xPos += (dx * delta * boost); // boost ca va degager
 		yPos += (dy * delta * boost); // c'est juste pour des tests
 		

@@ -52,7 +52,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos >= world.currentGrid[i][j][z].getyPos()
 								&& yPos <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
-							System.out.println("colide at north");
+							//System.out.println("colide at north");
 							if (dy < 0)
 								dy = 0;
 
@@ -62,7 +62,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + height >= world.currentGrid[i][j][z].getyPos() 
 								&& yPos + height <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) { 
-							System.out.println("colide at south");
+							//System.out.println("colide at south");
 							if (dy > 0)
 								dy = 0;
 
@@ -72,7 +72,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + (height / 2) >= world.currentGrid[i][j][z].getyPos()
 								&& yPos + (height / 2) <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
-							System.out.println("colide at west");
+							//System.out.println("colide at west");
 							if (dx < 0)
 								dx = 0;
 
@@ -82,7 +82,7 @@ public class MovingEntity {
 								&& !world.currentGrid[i][j][z].isWalkable
 								&& yPos + (height / 2) >= world.currentGrid[i][j][z].getyPos()
 								&& yPos + (height / 2) <= world.currentGrid[i][j][z].getyPos() + Tile.HEIGHT) {
-							System.out.println("colide at east");
+							//System.out.println("colide at east");
 							if (dx > 0)
 								dx = 0;
 

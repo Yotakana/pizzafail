@@ -76,7 +76,6 @@ public class Start {
 			drawMenu();
 			break;
 		case GAME:
-			music.stop();
 			GraphicCall.clearScreen();
 			gameUpdate();
 			world.draw();
@@ -148,11 +147,12 @@ public class Start {
 			}
 			if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
 					state = State.MENU;
-					music.playAsMusic(1.0f, 1.0f, true);
+					music.stop();
 			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
 				state = State.EDIT;
+				music.stop();
 			}
 				
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
@@ -174,6 +174,13 @@ public class Start {
 			break;
 			
 		case EDIT:
+			
+			if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+				world.wl.save(world);
+			}
+			if (Keyboard.isKeyDown(Keyboard.KEY_L)) {
+				world.wl.load(world);
+			}
 			
 			if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
 				selectionTile = 1;
@@ -218,6 +225,7 @@ public class Start {
 		case MENU:
 			if (Keyboard.isKeyDown(Keyboard.KEY_G)) {
 				state = State.GAME;
+				music.playAsMusic(1.0f, 1.0f, true);
 			}
 
 			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {

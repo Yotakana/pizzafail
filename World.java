@@ -5,10 +5,10 @@ public class World {
 	public final int WIDTH = 26;
 	public final int HEIGHT = 20;
 	public final int LAYER = 2;
-	private Tile[][][] grid1 = new Tile[WIDTH][HEIGHT][LAYER];
-	private Tile[][][] grid2 = new Tile[WIDTH][HEIGHT][LAYER];
-	private Tile[][][] grid3 = new Tile[WIDTH][HEIGHT][LAYER];
-	private Tile[][][] grid4 = new Tile[WIDTH][HEIGHT][LAYER];
+	public Tile[][][] grid1 = new Tile[WIDTH][HEIGHT][LAYER];
+	public Tile[][][] grid2 = new Tile[WIDTH][HEIGHT][LAYER];
+	public Tile[][][] grid3 = new Tile[WIDTH][HEIGHT][LAYER];
+	public Tile[][][] grid4 = new Tile[WIDTH][HEIGHT][LAYER];
 	public Tile[][][] currentGrid = null;
 	public final int MAX_ROW = 2;
 	public final int MAX_COL = 2;
@@ -16,30 +16,17 @@ public class World {
 	public int mapID;
 	public int xCoord, yCoord;
 	private Enemy robert;
+	public WorldLoader wl;
 
 	public World() {
 		
+		wl = new WorldLoader();
+		wl.initWorld(this);
+		
 		// defini la map de depart
-		mapCoord [0][0] = 1;
-		mapCoordToMapID();
-		setMap(mapID);
-		
-		// Map x: 0 y: 0
-		for (int x = 0; x < WIDTH - 1; x++) {
-			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid1[x][y][0] = new Tile(x * Tile.WIDTH, y * Tile.HEIGHT ,Tile.GRASS);
-			}
-		}
-		
-		
-		// Map x: 1 y: 0
-		for (int x = 0; x < WIDTH - 1; x++) {
-			for (int y = 0; y < HEIGHT - 1; y++) {
-				grid2[x][y][0] = new Tile(x * Tile.WIDTH, y * Tile.HEIGHT ,Tile.GRASS);
-			}
-		}
-		
-		
+			mapCoord [0][0] = 1;
+			mapCoordToMapID();
+			setMap(mapID);
 		
 		// Map x: 0 y: 1
 		for (int x = 0; x < WIDTH - 1; x++) {

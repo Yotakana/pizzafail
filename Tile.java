@@ -10,11 +10,13 @@ public class Tile {
 	public boolean isWalkable = false;
 	final static int WALL = 1, GRASS = 2, WATER = 3, TREE = 4, ROCK = 5;
 	private Texture tex;
+	public int type;
 
 	public Tile(int x, int y, int type) {
 
 		this.yPos = y;
 		this.xPos = x;
+		this.type = type;
 
 		switch (type) {
 		case 1:

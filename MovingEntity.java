@@ -23,7 +23,7 @@ public class MovingEntity {
 		this.textureName = textureName;
 		this.world = world;
 
-		texture = Image.loadTexture(textureName);
+		texture = LoadImage.loadTexture(textureName);
 
 	}
 
@@ -115,8 +115,6 @@ public class MovingEntity {
 		
 		xPos += (dx * delta * boost); // boost ca va degager
 		yPos += (dy * delta * boost); // c'est juste pour des tests
-		
-		System.out.println("dx " + dx +" , dy " + dy);
 
 	}
 

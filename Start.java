@@ -38,11 +38,14 @@ public class Start {
 	private TrueTypeFont font;
 	private Font menuFont = new Font("Times New Roman", Font.BOLD, 24);
 	private boolean antiAlias = true;
+	// position de la sourie
 	public int mouseX, mouseY;
-	public Joueur joueur;
-	public World world;
+	//variables pour le calcaule de delta
 	private long lastFrame;
 	private int delta;
+	// le joueur et le monde.
+	public Joueur joueur;
+	public World world;
 
 	public Start() {
 
@@ -179,9 +182,11 @@ public class Start {
 	}
 
 	private void getInput() {
-
-		// Method qui gere tout les Inputs clavier et sourie
-		// en fonction des states ( avec un switch ).
+		
+		/*
+		 * Method qui gere tout les Inputs clavier et sourie
+		 * en fonction des states ( avec un switch ).
+		 */
 
 		// calcule des coordonnées de la souris sur la fenetre de jeu.
 		mouseX = Mouse.getX();
@@ -208,18 +213,18 @@ public class Start {
 			// ou 0.11 si on va en diagonal.
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)
-					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 					joueur.setDy(-.115);
-				}else
+				} else
 					joueur.setDy(-.15);
 				
-			}else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)
-					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 					joueur.setDy(.115);
-				}else
+				} else
 					joueur.setDy(.15);
-			}else {
+			} else {
 			// Ni UP ni DOWN appuyé on bouge plus sur l'axe Y.
 				joueur.setDy(0);
 			}
@@ -228,18 +233,18 @@ public class Start {
 			// ou 0.11 si on va en diagonal.
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
-					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 					joueur.setDx(.115);
-				}else
+				} else
 					joueur.setDx(.15);
 				
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
-					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
 					joueur.setDx(-.115);
-				}else
+				} else
 					joueur.setDx(-.15);
-			}else {
+			} else {
 			// Ni RIGHT ni LEFT appuyé on bouge plus sur l'axe X.
 				joueur.setDx(0);
 			}
@@ -355,7 +360,7 @@ public class Start {
 		
 		// Si la texture na pas deja été charger ..on le fait.
 		if (selectTex == null)
-			selectTex = Image.selection;
+			selectTex = LoadImage.selection;
 		
 		// On dessiner le Quad avec sa texture.
 		selectTex.bind();
@@ -377,13 +382,13 @@ public class Start {
 		// Affichage de texte
 		font.drawString(20, 20, "MODE EDITION :", Color.black);
 		font.drawString(20, 50, "S : Save ", Color.black);
-		font.drawString(20, 80, "L : load ", Color.black);
+		font.drawString(20, 80, "L : Load ", Color.black);
 		// On remet les couleur à zero ( sinon tout deviens noir apres ).
 		GraphicCall.resetColor();
 		
 		// Check si texture deja chargé.
 		if (cadreSelectionTex == null)
-			cadreSelectionTex = Image.cadreSelection;
+			cadreSelectionTex = LoadImage.cadreSelection;
 
 		// Blabla...Quad + texture.
 		// Ce Quad est le coutour du preview en mode edit.
@@ -403,19 +408,19 @@ public class Start {
 		switch (selectionTile) {
 
 		case Tile.WALL:
-			selectionTileTex = Image.wall;
+			selectionTileTex = LoadImage.wall;
 			break;
 		case Tile.GRASS:
-			selectionTileTex = Image.grass;
+			selectionTileTex = LoadImage.grass;
 			break;
 		case Tile.WATER:
-			selectionTileTex = Image.water;
+			selectionTileTex = LoadImage.water;
 			break;
 		case Tile.TREE:
-			selectionTileTex = Image.tree;
+			selectionTileTex = LoadImage.tree;
 			break;
 		case Tile.ROCK:
-			selectionTileTex = Image.rock;
+			selectionTileTex = LoadImage.rock;
 			break;
 		}
 

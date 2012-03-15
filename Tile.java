@@ -21,23 +21,23 @@ public class Tile {
 		switch (type) {
 		case 1:
 			isWalkable = false;
-			tex = Image.wall;
+			tex = LoadImage.wall;
 			break;
 		case 2:
 			isWalkable = true;
-			tex = Image.grass;
+			tex = LoadImage.grass;
 			break;
 		case 3:
 			isWalkable = false;
-			tex = Image.water;
+			tex = LoadImage.water;
 			break;
 		case 4:
 			isWalkable = false;
-			tex = Image.tree;
+			tex = LoadImage.tree;
 			break;
 		case 5:
 			isWalkable = false;
-			tex = Image.rock;
+			tex = LoadImage.rock;
 			break;
 		}
 

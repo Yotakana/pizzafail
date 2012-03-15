@@ -6,7 +6,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 
-public class Image {
+public class LoadImage {
 	
 	
 	static Texture grass = loadTexture("grass");

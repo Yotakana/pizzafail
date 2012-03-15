@@ -16,10 +16,10 @@ import org.newdawn.slick.opengl.Texture;
 public class Start {
 	
 	// Taille de la fenetre du jeu.
-	private static int WIDTH = 800;
-	private static int HEIGHT = 600;
+	private final int WIDTH = 800;
+	private final int HEIGHT = 600;
 	// Nombre d'images pas secondes.
-	private static int FPS = 60;
+	private final int FPS = 60;
 	// State de depart du jeu.
 	private State state = State.MENU;
 	// Boolean pour la Main loop
@@ -111,7 +111,7 @@ public class Start {
 
 	}
 
-	public void gameUpdate() {
+	private void gameUpdate() {
 
 		/*
 		 * Method qui recroupe tout les calculs de mouvement joueur, mobs,
@@ -205,24 +205,45 @@ public class Start {
 				music.stop();
 			}
 			// Bouge le joueur de 0.15 en fonction de la direction Y.
+			// ou 0.11 si on va en diagonal.
 			if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-				joueur.setDy(-.15);
-			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-				joueur.setDy(.15);
-			} else {
-			// Si pas de touche appuyer on bouge plus.
+				if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)
+					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+					joueur.setDy(-.115);
+				}else
+					joueur.setDy(-.15);
+				
+			}else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+				if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)
+					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
+					joueur.setDy(.115);
+				}else
+					joueur.setDy(.15);
+			}else {
+			// Ni UP ni DOWN appuyé on bouge plus sur l'axe Y.
 				joueur.setDy(0);
 			}
-			// Bouge le joueur de 0.15 en fonction de la direction Y.
+			
+			// Bouge le joueur de 0.15 en fonction de la direction X,
+			// ou 0.11 si on va en diagonal.
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-				joueur.setDx(.15);
+				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
+					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+					joueur.setDx(.115);
+				}else
+					joueur.setDx(.15);
+				
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-				joueur.setDx(-.15);
-			} else {
-			// Si pas de touche appuyer on bouge plus.
+				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
+					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+					joueur.setDx(-.115);
+				}else
+					joueur.setDx(-.15);
+			}else {
+			// Ni RIGHT ni LEFT appuyé on bouge plus sur l'axe X.
 				joueur.setDx(0);
-
 			}
+			
 			break;
 		case EDIT:
 			// On sauve le monde !!! (voir class WorldLoader).

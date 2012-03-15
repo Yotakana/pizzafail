@@ -211,7 +211,7 @@ public class Start {
 				joueur.setDy(.15);
 			} else {
 			// Si pas de touche appuyer on bouge plus.
-				joueur.setDy(0); // si pas de touche appuyer on bouge plus
+				joueur.setDy(0);
 			}
 			// Bouge le joueur de 0.15 en fonction de la direction Y.
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
@@ -299,18 +299,22 @@ public class Start {
 
 	private void setupEntity() {
 
-		// Initialise tout les objets necessaire au jeu.
+		// Creation du monde.
 		world = new World();
+		// Creation du joueur.
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
+		// initialisation de la font.
 		font = new TrueTypeFont(menuFont, antiAlias);
 
 	}
 
 	private long getTime() {
+		
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 
 	private int getDelta() {
+		// Calcule le delta.
 		long currentTime = getTime();
 		int delta = (int) (currentTime - lastFrame);
 		lastFrame = getTime();
@@ -318,19 +322,22 @@ public class Start {
 	}
 
 	private void setUpTimer() {
+		
 		lastFrame = getTime();
 	}
 
 	private void drawSelect(int mousex, int mousey) {
-
+	
+		// Calcule les coordonnées de la sourie en tile de 32*32
 		int x = mousex * 32;
 		int y = (mousey * 32) + 32;
-
+		
+		// Si la texture na pas deja été charger ..on le fait.
 		if (selectTex == null)
 			selectTex = Image.selection;
-
+		
+		// On dessiner le Quad avec sa texture.
 		selectTex.bind();
-
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2d(0, 0);
 		GL11.glVertex2d(x, y);
@@ -345,29 +352,33 @@ public class Start {
 	}
 
 	private void drawMenuEdit() {
-
+		
+		// Affichage de texte
 		font.drawString(20, 20, "MODE EDITION :", Color.black);
 		font.drawString(20, 50, "S : Save ", Color.black);
 		font.drawString(20, 80, "L : load ", Color.black);
+		// On remet les couleur à zero ( sinon tout deviens noir apres ).
 		GraphicCall.resetColor();
-
+		
+		// Check si texture deja chargé.
 		if (cadreSelectionTex == null)
 			cadreSelectionTex = Image.cadreSelection;
 
+		// Blabla...Quad + texture.
+		// Ce Quad est le coutour du preview en mode edit.
 		cadreSelectionTex.bind();
-
-		GL11.glBegin(GL11.GL_QUADS); // BackGroung pour le preview des Tiles.
+		GL11.glBegin(GL11.GL_QUADS); 
 		GL11.glTexCoord2d(0, 0);
 		GL11.glVertex2i(48, 516);
 		GL11.glTexCoord2d(cadreSelectionTex.getWidth(), 0);
 		GL11.glVertex2i(84, 516);
-		GL11.glTexCoord2d(cadreSelectionTex.getWidth(),
-				cadreSelectionTex.getHeight());
+		GL11.glTexCoord2d(cadreSelectionTex.getWidth(),cadreSelectionTex.getHeight());
 		GL11.glVertex2i(84, 552);
 		GL11.glTexCoord2d(0, cadreSelectionTex.getHeight());
 		GL11.glVertex2i(48, 552);
 		GL11.glEnd();
 
+		// Switch pour savoir Quel texture de Tile appliquer dans le preview,
 		switch (selectionTile) {
 
 		case Tile.WALL:
@@ -387,15 +398,14 @@ public class Start {
 			break;
 		}
 
+		// et on dessine le preview.
 		selectionTileTex.bind();
-
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2d(0, 0);
 		GL11.glVertex2i(50, 518);
 		GL11.glTexCoord2d(selectionTileTex.getWidth(), 0);
 		GL11.glVertex2i(82, 518);
-		GL11.glTexCoord2d(selectionTileTex.getWidth(),
-				selectionTileTex.getHeight());
+		GL11.glTexCoord2d(selectionTileTex.getWidth(),selectionTileTex.getHeight());
 		GL11.glVertex2i(82, 550);
 		GL11.glTexCoord2d(0, selectionTileTex.getHeight());
 		GL11.glVertex2i(50, 550);
@@ -405,22 +415,24 @@ public class Start {
 
 	private void drawMenu() {
 
-		font.drawString(52, 22, "MENU !         Echap : Quit G : Jeu",
-				Color.black);
-		font.drawString(50, 20, "MENU !         Echap : Quit G : Jeu",
-				Color.white);
+		// Menu Principal.
+		font.drawString(52, 22, "MENU !         Echap : Quit G : Jeu",Color.black);
+		font.drawString(50, 20, "MENU !         Echap : Quit G : Jeu",Color.white);
 		font.drawString(50, 550, "WOOOOOOOOO Du Text !!!!", Color.white);
+		// Le reset des couleurs.
 		GraphicCall.resetColor();
 
 	}
 
 	public static void main(String[] args) {
-
+		
+		// La method Main ...normal ^^
 		new Start();
 
 	}
 
 	public enum State {
+		// L'enum pour les states du jeu.
 		MENU, GAME, EDIT;
 	}
 

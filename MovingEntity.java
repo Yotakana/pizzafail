@@ -4,9 +4,9 @@ import org.newdawn.slick.opengl.Texture;
 
 public class MovingEntity {
 
-	double xPos, yPos;
-	double width, height;
-	double dx, dy;
+	public double xPos, yPos;
+	public double width, height;
+	public double dx, dy;
 	public String textureName;
 	public Texture texture;
 	public int delta = 0; 
@@ -116,6 +116,7 @@ public class MovingEntity {
 		xPos += (dx * delta * boost); // boost ca va degager
 		yPos += (dy * delta * boost); // c'est juste pour des tests
 		
+		System.out.println("dx " + dx +" , dy " + dy);
 
 	}
 

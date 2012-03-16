@@ -33,7 +33,7 @@ public class Start {
 	// Layer par default du mode edition.
 	private int drawLayer = 0;
 	// Variable pour la musique du jeu.
-	private Audio music = Sound.intro;
+	private Audio music;
 	// Variable pour les textes
 	private TrueTypeFont font;
 	private Font menuFont = new Font("Times New Roman", Font.BOLD, 28);
@@ -331,6 +331,8 @@ public class Start {
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
 		// initialisation de la font.
 		font = new TrueTypeFont(menuFont, antiAlias);
+		// initialisation de la music.
+		music = LoadResource.introTheme;
 
 	}
 
@@ -360,7 +362,7 @@ public class Start {
 		
 		// Si la texture na pas deja été charger ..on le fait.
 		if (selectTex == null)
-			selectTex = LoadImage.selection;
+			selectTex = LoadResource.selection;
 		
 		// On dessiner le Quad avec sa texture.
 		selectTex.bind();
@@ -388,7 +390,7 @@ public class Start {
 		
 		// Check si texture deja chargé.
 		if (cadreSelectionTex == null)
-			cadreSelectionTex = LoadImage.cadreSelection;
+			cadreSelectionTex = LoadResource.cadreSelection;
 
 		// Blabla...Quad + texture.
 		// Ce Quad est le coutour du preview en mode edit.
@@ -408,19 +410,19 @@ public class Start {
 		switch (selectionTile) {
 
 		case Tile.WALL:
-			selectionTileTex = LoadImage.wall;
+			selectionTileTex = LoadResource.wall;
 			break;
 		case Tile.GRASS:
-			selectionTileTex = LoadImage.grass;
+			selectionTileTex = LoadResource.grass;
 			break;
 		case Tile.WATER:
-			selectionTileTex = LoadImage.water;
+			selectionTileTex = LoadResource.water;
 			break;
 		case Tile.TREE:
-			selectionTileTex = LoadImage.tree;
+			selectionTileTex = LoadResource.tree;
 			break;
 		case Tile.ROCK:
-			selectionTileTex = LoadImage.rock;
+			selectionTileTex = LoadResource.rock;
 			break;
 		}
 

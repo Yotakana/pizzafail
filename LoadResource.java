@@ -1,13 +1,17 @@
 package jeu;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 
-public class LoadImage {
+public class LoadResource {
 	
+	static Audio introTheme = loadSound("zelda");
 	
 	static Texture grass = loadTexture("grass");
 	static Texture wall = loadTexture("wall");
@@ -30,5 +34,17 @@ public class LoadImage {
 		return null;
 
 	}
+	
+	public static Audio loadSound(String name) {
+		try {
+			return AudioLoader.getAudio("OGG",
+					ResourceLoader.getResourceAsStream("snd/" + name + ".ogg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 
 }

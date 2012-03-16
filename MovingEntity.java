@@ -23,7 +23,7 @@ public class MovingEntity {
 		this.textureName = textureName;
 		this.world = world;
 
-		texture = LoadImage.loadTexture(textureName);
+		texture = LoadResource.loadTexture(textureName);
 
 	}
 

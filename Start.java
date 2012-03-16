@@ -28,6 +28,7 @@ public class Start {
 	private Texture selectTex;
 	private Texture cadreSelectionTex;
 	private Texture selectionTileTex = null;
+	private Texture dialogueBox = null;
 	// Selection par default pour le mode edition
 	private int selectionTile = Tile.WALL;
 	// Layer par default du mode edition.
@@ -36,7 +37,9 @@ public class Start {
 	private Audio music;
 	// Variable pour les textes
 	private TrueTypeFont font;
+	private TrueTypeFont fontDialogue;
 	private Font menuFont = new Font("Times New Roman", Font.BOLD, 28);
+	private Font dialogueFont = new Font("Times New Roman", Font.BOLD, 14);
 	private boolean antiAlias = true;
 	// position de la sourie
 	public int mouseX, mouseY;
@@ -88,6 +91,13 @@ public class Start {
 			world.draw();
 			joueur.draw();
 			world.drawLayer();
+			break;
+		case DIALOGUE:
+			GraphicCall.clearScreen();
+			world.draw();
+			joueur.draw();
+			world.drawLayer();
+			drawDialogueBox();
 			break;
 		case EDIT:
 			// On efface l'ecran,
@@ -200,13 +210,28 @@ public class Start {
 			if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
 				joueur.boost = 2;
 			}
+			else if(Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
+				int x = (int) Math.round((joueur.xPos / 32));
+				int y = (int) Math.round((joueur.yPos / 32));
+				if(joueur.currentAnim == joueur.animUp)
+					y-=1;
+				else if(joueur.currentAnim == joueur.animDown)
+					y+=1;
+				else if(joueur.currentAnim == joueur.animLeft)
+					x-=1;
+				else if(joueur.currentAnim == joueur.animRight)
+					x+=1;
+				if(world.currentGrid[x][y][1] != null && world.currentGrid[x][y][1].type == 4)
+					state = State.DIALOGUE;
+				
+			}
 			// Change le state pour que le menu s'affiche et stop la musique.
-			if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
+			else if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
 				state = State.MENU;
 				music.stop();
 			}
 			// Change le state pour que le mode edit s'active et stop la musique.
-			if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
+			else if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
 				state = State.EDIT;
 				music.stop();
 			}
@@ -217,6 +242,8 @@ public class Start {
 					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 					joueur.setDy(-.115);
 				} else
+					joueur.currentAnim = joueur.animUp;
+					joueur.currentAnim.start();
 					joueur.setDy(-.15);
 				
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -224,10 +251,17 @@ public class Start {
 					|| Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 					joueur.setDy(.115);
 				} else
+					joueur.currentAnim = joueur.animDown;
+					joueur.currentAnim.start();
 					joueur.setDy(.15);
 			} else {
 			// Ni UP ni DOWN appuyé on bouge plus sur l'axe Y.
 				joueur.setDy(0);
+				if(joueur.currentAnim == joueur.animDown
+						|| joueur.currentAnim == joueur.animUp){
+					joueur.currentAnim.stop();
+					joueur.currentAnim.setCurrentFrame(0);
+					}
 			}
 			
 			// Bouge le joueur de 0.15 en fonction de la direction X,
@@ -255,9 +289,13 @@ public class Start {
 					joueur.setDx(-.15);
 			} else {
 			// Ni RIGHT ni LEFT appuyé on bouge plus sur l'axe X.
+				joueur.setDx(0);
+				if(joueur.currentAnim == joueur.animLeft
+					|| joueur.currentAnim == joueur.animRight){
 				joueur.currentAnim.stop();
 				joueur.currentAnim.setCurrentFrame(0);
-				joueur.setDx(0);
+				}
+				
 			}
 			
 			break;
@@ -267,7 +305,7 @@ public class Start {
 				world.wl.save(world);
 			}
 			// On charge le monde depuis une sauvegarde.
-			if (Keyboard.isKeyDown(Keyboard.KEY_L)) {
+			else if (Keyboard.isKeyDown(Keyboard.KEY_L)) {
 				world.wl.load(world);
 			}
 			// Selection des Tiles pour le mode édition avec touche 1, 2, 3...
@@ -325,13 +363,18 @@ public class Start {
 			}
 			
 			// Si echap on casse la Main loop.
-			if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+			else if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
 				running = false;
 			}
 
 			break;
-
+		case DIALOGUE:
+			if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
+				state = State.GAME;
+			}
+			break;
 		}
+		
 	}
 
 	private void setupEntity() {
@@ -342,6 +385,7 @@ public class Start {
 		joueur = new Joueur(200, 200, 32, 32, "link", world);
 		// initialisation de la font.
 		font = new TrueTypeFont(menuFont, antiAlias);
+		fontDialogue = new TrueTypeFont(dialogueFont, antiAlias);
 		// initialisation de la music.
 		music = LoadResource.introTheme;
 		
@@ -373,7 +417,7 @@ public class Start {
 		
 		// Si la texture na pas deja été charger ..on le fait.
 		if (selectTex == null)
-			selectTex = LoadResource.selection;
+			selectTex = LoadResource.selectionImg.getTexture();
 		
 		// On dessiner le Quad avec sa texture.
 		selectTex.bind();
@@ -404,7 +448,7 @@ public class Start {
 		
 		// Check si texture deja chargé.
 		if (cadreSelectionTex == null)
-			cadreSelectionTex = LoadResource.cadreSelection;
+			cadreSelectionTex = LoadResource.cadreSelectionImg.getTexture();
 
 		// Blabla...Quad + texture.
 		// Ce Quad est le coutour du preview en mode edit.
@@ -424,19 +468,19 @@ public class Start {
 		switch (selectionTile) {
 
 		case Tile.WALL:
-			selectionTileTex = LoadResource.wall;
+			selectionTileTex = LoadResource.wallImg.getTexture();
 			break;
 		case Tile.GRASS:
-			selectionTileTex = LoadResource.grass;
+			selectionTileTex = LoadResource.grassImg.getTexture();
 			break;
 		case Tile.WATER:
-			selectionTileTex = LoadResource.water;
+			selectionTileTex = LoadResource.waterImg.getTexture();
 			break;
 		case Tile.TREE:
-			selectionTileTex = LoadResource.tree;
+			selectionTileTex = LoadResource.treeImg.getTexture();
 			break;
 		case Tile.ROCK:
-			selectionTileTex = LoadResource.rock;
+			selectionTileTex = LoadResource.rockImg.getTexture();
 			break;
 		}
 
@@ -465,6 +509,26 @@ public class Start {
 		GraphicCall.resetColor();
 
 	}
+	
+	private void drawDialogueBox() {
+		if (dialogueBox == null)
+			dialogueBox = LoadResource.getImg("dialogue").getTexture();
+		
+		dialogueBox.bind();
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glTexCoord2d(0, 0);
+		GL11.glVertex2i(500, 480);
+		GL11.glTexCoord2d(dialogueBox.getWidth(), 0);
+		GL11.glVertex2i(780, 480);
+		GL11.glTexCoord2d(dialogueBox.getWidth(),dialogueBox.getHeight());
+		GL11.glVertex2i(780, 580);
+		GL11.glTexCoord2d(0, dialogueBox.getHeight());
+		GL11.glVertex2i(500, 580);
+		GL11.glEnd();
+		fontDialogue.drawString(520,500 , "Robert : Bonjour Mr. l'arbre....",Color.white);
+		GraphicCall.resetColor();
+
+	}
 
 	public static void main(String[] args) {
 		
@@ -475,7 +539,7 @@ public class Start {
 
 	public enum State {
 		// L'enum pour les states du jeu.
-		MENU, GAME, EDIT;
+		MENU, GAME, EDIT, DIALOGUE;
 	}
 
 }

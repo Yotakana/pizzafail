@@ -4,7 +4,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
-import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.util.ResourceLoader;
 
 
@@ -19,19 +18,14 @@ public class LoadResource {
 	static Image rockImg = getImg("rock");
 	static Image selectionImg = getImg("selection");
 	static Image cadreSelectionImg = getImg("cadreselection");
-	
 	static Image link_right1 = getImg("link_right1");
 	static Image link_right2 = getImg("link_right2");
 	static Image link_left1 = getImg("link_left1");
 	static Image link_left2 = getImg("link_left2");
-	
-	static Texture grass = grassImg.getTexture();
-	static Texture wall = wallImg.getTexture();
-	static Texture water = waterImg.getTexture();
-	static Texture tree = treeImg.getTexture();
-	static Texture rock = rockImg.getTexture();
-	static Texture selection = selectionImg.getTexture();
-	static Texture cadreSelection = cadreSelectionImg.getTexture();
+	static Image link_up1 = getImg("link_up1");
+	static Image link_up2 = getImg("link_up2");
+	static Image link_down1 = getImg("link_down1");
+	static Image link_down2 = getImg("link_down2");
 	
 	public static Audio loadSound(String name) {
 		try {

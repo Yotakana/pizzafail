@@ -36,8 +36,6 @@ public class WorldLoader {
 			e.printStackTrace();
 		}
 
-		System.out.println("loading...");
-
 	}
 
 	public void loadLayer1(World world) {
@@ -67,8 +65,6 @@ public class WorldLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("loading...");
 
 	}
 
@@ -111,7 +107,7 @@ public class WorldLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		try {
 			SAXBuilder builder = new SAXBuilder();
 			Document document = builder.build("maps/map2layer0.xml");
@@ -147,7 +143,7 @@ public class WorldLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		System.out.println("Maps loaded");
 
 	}

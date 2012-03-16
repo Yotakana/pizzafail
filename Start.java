@@ -36,7 +36,7 @@ public class Start {
 	private Audio music = Sound.intro;
 	// Variable pour les textes
 	private TrueTypeFont font;
-	private Font menuFont = new Font("Times New Roman", Font.BOLD, 24);
+	private Font menuFont = new Font("Times New Roman", Font.BOLD, 28);
 	private boolean antiAlias = true;
 	// position de la sourie
 	public int mouseX, mouseY;

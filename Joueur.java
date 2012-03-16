@@ -15,19 +15,24 @@ public class Joueur extends MovingEntity {
 		animLeft = new Animation();
 		animRight = new Animation();
 		
-		animUp.addFrame(LoadResource.link_up1, 150);
-		animUp.addFrame(LoadResource.link_up2, 150);
+		animUp.addFrame(Resource.link_up1, 150);
+		animUp.addFrame(Resource.link_up2, 150);
 		
-		animDown.addFrame(LoadResource.link_down1, 150);
-		animDown.addFrame(LoadResource.link_down2, 150);
+		animDown.addFrame(Resource.link_down1, 150);
+		animDown.addFrame(Resource.link_down2, 150);
 		
-		animLeft.addFrame(LoadResource.link_left1, 150);
-		animLeft.addFrame(LoadResource.link_left2, 150);
+		animLeft.addFrame(Resource.link_left1, 150);
+		animLeft.addFrame(Resource.link_left2, 150);
 		
-		animRight.addFrame(LoadResource.link_right1, 150);
-		animRight.addFrame(LoadResource.link_right2, 150);
+		animRight.addFrame(Resource.link_right1, 150);
+		animRight.addFrame(Resource.link_right2, 150);
 		
 		System.out.println("Player animation loaded");
+		
+		animUp.stop();
+		animDown.stop();
+		animRight.stop();
+		animLeft.stop();
 		
 		currentAnim = animRight;
 

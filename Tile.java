@@ -20,23 +20,23 @@ public class Tile {
 		switch (type) {
 		case 1:
 			isWalkable = false;
-			tex = LoadResource.wallImg.getTexture();
+			tex = Resource.wallImg.getTexture();
 			break;
 		case 2:
 			isWalkable = true;
-			tex = LoadResource.grassImg.getTexture();
+			tex = Resource.grassImg.getTexture();
 			break;
 		case 3:
 			isWalkable = false;
-			tex = LoadResource.waterImg.getTexture();
+			tex = Resource.waterImg.getTexture();
 			break;
 		case 4:
 			isWalkable = false;
-			tex = LoadResource.treeImg.getTexture();
+			tex = Resource.treeImg.getTexture();
 			break;
 		case 5:
 			isWalkable = false;
-			tex = LoadResource.rockImg.getTexture();
+			tex = Resource.rockImg.getTexture();
 			break;
 		}
 

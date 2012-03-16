@@ -1,5 +1,6 @@
 package jeu;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.opengl.Texture;
 
 public class MovingEntity {
@@ -12,6 +13,13 @@ public class MovingEntity {
 	public int delta = 0; 
 	public World world;
 	public int boost = 1; // ca va degager, juste pour des tests
+	public static final int UP = 1, DOWN = 2, LEFT = 3, RIGHT =4;
+	public Animation currentAnim;
+	protected Animation animUp;
+	protected Animation animDown;
+	protected Animation animLeft;
+	protected Animation animRight;
+	
 
 	public MovingEntity(double x, double y, double width, double height,
 			String textureName, World world) {
@@ -23,7 +31,7 @@ public class MovingEntity {
 		this.textureName = textureName;
 		this.world = world;
 
-		texture = LoadResource.loadTexture(textureName);
+		texture = LoadResource.getImg(textureName).getTexture();
 
 	}
 

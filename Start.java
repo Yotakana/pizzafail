@@ -115,6 +115,7 @@ public class Start {
 	}
 
 	private void gameUpdate() {
+		//LoadResource.animFireCamp.update(16);
 
 		/*
 		 * Method qui recroupe tout les calculs de mouvement joueur, mobs,
@@ -234,18 +235,28 @@ public class Start {
 			if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
 					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+					joueur.currentAnim = joueur.animRight;
+					joueur.currentAnim.start();
 					joueur.setDx(.115);
 				} else
+					joueur.currentAnim = joueur.animRight;
+					joueur.currentAnim.start();
 					joueur.setDx(.15);
 				
 			} else if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
 				if(Keyboard.isKeyDown(Keyboard.KEY_UP)
 					|| Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+					joueur.currentAnim = joueur.animLeft;
+					joueur.currentAnim.start();
 					joueur.setDx(-.115);
 				} else
+					joueur.currentAnim = joueur.animLeft;
+					joueur.currentAnim.start();
 					joueur.setDx(-.15);
 			} else {
 			// Ni RIGHT ni LEFT appuyé on bouge plus sur l'axe X.
+				joueur.currentAnim.stop();
+				joueur.currentAnim.setCurrentFrame(0);
 				joueur.setDx(0);
 			}
 			
@@ -333,7 +344,7 @@ public class Start {
 		font = new TrueTypeFont(menuFont, antiAlias);
 		// initialisation de la music.
 		music = LoadResource.introTheme;
-
+		
 	}
 
 	private long getTime() {
@@ -382,10 +393,13 @@ public class Start {
 	private void drawMenuEdit() {
 		
 		// Affichage de texte
-		font.drawString(20, 20, "MODE EDITION :", Color.black);
-		font.drawString(20, 50, "S : Save ", Color.black);
-		font.drawString(20, 80, "L : Load ", Color.black);
-		// On remet les couleur à zero ( sinon tout deviens noir apres ).
+		font.drawString(22, 22, "MODE EDITION :", Color.black);
+		font.drawString(20, 20, "MODE EDITION :", Color.white);
+		font.drawString(22, 52, "S : Save ", Color.black);
+		font.drawString(20, 50, "S : Save ", Color.white);
+		font.drawString(22, 82, "L : Load ", Color.black);
+		font.drawString(20, 80, "L : Load ", Color.white);
+		// On remet les couleur à zero ( sinon tout deviens blanc apres ).
 		GraphicCall.resetColor();
 		
 		// Check si texture deja chargé.

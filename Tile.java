@@ -6,7 +6,6 @@ public class Tile {
 
 	private int xPos = 0, yPos = 0 ;
 	final static int WIDTH = 32, HEIGHT = 32;
-	public String location;
 	public boolean isWalkable = false;
 	final static int WALL = 1, GRASS = 2, WATER = 3, TREE = 4, ROCK = 5;
 	private Texture tex;

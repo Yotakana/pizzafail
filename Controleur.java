@@ -14,6 +14,8 @@ public class Controleur {
 	private World world;
 	private Menu menu;
 	private State state;
+	private long inputInterval = 300;
+	private long lastInput = System.currentTimeMillis();
 	
 	public Controleur(Joueur joueur,World world,State state,Menu menu){
 		
@@ -47,7 +49,7 @@ public class Controleur {
 			if (Keyboard.isKeyDown(Keyboard.KEY_F1)) {
 				joueur.boost = 2;
 			}
-			else if(Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
+			else if(System.currentTimeMillis() > lastInput + inputInterval && Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
 				int x = (int) Math.round((joueur.xPos / 32));
 				int y = (int) Math.round((joueur.yPos / 32));
 				if(joueur.currentAnim == joueur.animUp)
@@ -60,6 +62,7 @@ public class Controleur {
 					x+=1;
 				if(world.currentGrid[x][y][1] != null && world.currentGrid[x][y][1].type == 4)
 					state.set(State.GameState.DIALOGUE);
+					lastInput = System.currentTimeMillis();
 				
 			}
 			// Change le state pour que le menu s'affiche et stop la musique.
@@ -207,8 +210,9 @@ public class Controleur {
 
 			break;
 		case DIALOGUE:
-			if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
+			if (System.currentTimeMillis() > lastInput + inputInterval && Keyboard.isKeyDown(Keyboard.KEY_RETURN)){
 				state.set(State.GameState.GAME);
+				lastInput = System.currentTimeMillis();
 			}
 			break;
 		}

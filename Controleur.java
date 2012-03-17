@@ -95,7 +95,7 @@ public class Controleur {
 					joueur.currentAnim.start();
 					joueur.setDy(.15);
 			} else {
-			// Ni UP ni DOWN appuyé on bouge plus sur l'axe Y.
+			// Ni UP ni DOWN appuyï¿½ on bouge plus sur l'axe Y.
 				joueur.setDy(0);
 				if(joueur.currentAnim == joueur.animDown
 						|| joueur.currentAnim == joueur.animUp){
@@ -128,7 +128,7 @@ public class Controleur {
 					joueur.currentAnim.start();
 					joueur.setDx(-.15);
 			} else {
-			// Ni RIGHT ni LEFT appuyé on bouge plus sur l'axe X.
+			// Ni RIGHT ni LEFT appuyï¿½ on bouge plus sur l'axe X.
 				joueur.setDx(0);
 				if(joueur.currentAnim == joueur.animLeft
 					|| joueur.currentAnim == joueur.animRight){
@@ -148,8 +148,8 @@ public class Controleur {
 			else if (Keyboard.isKeyDown(Keyboard.KEY_L)) {
 				world.wl.load(world);
 			}
-			// Selection des Tiles pour le mode édition avec touche 1, 2, 3...
-			// drawlayer en fonction du type d'objet à placer.
+			// Selection des Tiles pour le mode ï¿½dition avec touche 1, 2, 3...
+			// drawlayer en fonction du type d'objet ï¿½ placer.
 			if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
 				menu.selectionTile = 1; // 1 = WAll.
 				drawLayer = 0; 
@@ -175,23 +175,23 @@ public class Controleur {
 			// Si click bouton 1 de la sourie on essaye de placer un bloc
 			// uniquement si le layer correspondant est vide.
 			if (Mouse.isButtonDown(0)) {
-			// calcule des coordonnées du block à la position de  la sourie.
+			// calcule des coordonnï¿½es du block ï¿½ la position de  la sourie.
 				int x = (int) Math.round(mouseX / 32);
 				int y = (int) Math.round(mouseY / 32);
 				if (world.currentGrid[x][y][drawLayer] == null) {
 					world.currentGrid[x][y][drawLayer] = new Tile(x
 							* Tile.WIDTH, (y * Tile.HEIGHT), menu.selectionTile);
-			// Affichage pour debug, à degager plus tard.		
+			// Affichage pour debug, ï¿½ degager plus tard.		
 					System.out.println("New Block at : " + x + " , " + y);
 				}
 			}
 			// Si click bouton 2 de la sourie on enleve le bloc,
-			// en mettant la valeur du tableau egale à null.
+			// en mettant la valeur du tableau egale ï¿½ null.
 			if (Mouse.isButtonDown(1)) {
 				int x = (int) Math.round(mouseX / 32);
 				int y = (int) Math.round(mouseY / 32);
 				world.currentGrid[x][y][drawLayer] = null;
-			// Affichage pour debug, à degager plus tard.		
+			// Affichage pour debug, ï¿½ degager plus tard.		
 				System.out.println(x + " " + y);
 			}
 
